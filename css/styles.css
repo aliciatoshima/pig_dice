@@ -22,3 +22,9 @@
   display: none;
   text-align: center;
 }
+
+.message {
+  display: none;
+  text-align: center;
+  font-size: 40px;
+}
