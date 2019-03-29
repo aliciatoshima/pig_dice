@@ -28,6 +28,8 @@ var img = new Image();
 
   $("#p1-roll").click(function() {
 
+    $(".message").hide()
+
     roll1 = randInt(1,7);
     $(".p1-roll").text(roll1)
     img.src = "https://cdn2.iconfinder.com/data/icons/dice-roll/100/dice_black_" + roll1 + "-512.png";
@@ -46,16 +48,15 @@ var img = new Image();
       $(".player").text("2")
       $(".message").show()
 
+      //disable p1's buttons
       document.getElementById("p1-roll").disabled = true
       document.getElementById("p1-hold").disabled = true
+      //enable p1's buttons
+      document.getElementById("p2-roll").disabled = false
+      document.getElementById("p2-hold").disabled = false
+
       //$(".img").empty()
     } else {
-      // img.src = "https://cdn2.iconfinder.com/data/icons/dice-roll/100/dice_black_" +roll1 + "-512.png";
-      // img.alt = "dice2";
-      // img.style.width = "300px";
-      //
-      // $(".img").empty().append(img);
-      // $(".img").show()
 
      Player1.current_total = Player1.current_total + roll1
     }
@@ -65,28 +66,36 @@ var img = new Image();
 
 
     $("#p2-roll").click(function() {
-      //debugger;
+
+      $(".message").hide()
+
       roll2 = randInt(1,7);
       $(".p2-roll").text(roll2)
+      img.src = "https://cdn2.iconfinder.com/data/icons/dice-roll/100/dice_black_" + roll2 + "-512.png";
+      img.alt = "dice2";
+      img.style.width = "300px";
+
+      $(".img").empty().append(img);
+      $(".img").show()
 
       if (roll2 === 1) {
+
         Player2.current_total = 0
-        $(".p2-roll").empty()
-        alert("Player 1's turn!")
-        $(".img").empty()
+        //$(".p1-roll").empty()
+
+        //alert("Player 2's turn!")
+        $(".player").text("1")
+        $(".message").show()
+
+        //disable p2's buttons
+        document.getElementById("p2-roll").disabled = true
+        document.getElementById("p2-hold").disabled = true
+        //enable p1's buttons
         document.getElementById("p1-roll").disabled = false
         document.getElementById("p1-hold").disabled = false
       } else {
 
-        img.src = "https://cdn2.iconfinder.com/data/icons/dice-roll/100/dice_black_" +roll2 + "-512.png";
-        img.alt = "dice2";
-        img.style.width = "300px";
-
-        $(".img").empty().append(img);
-        $(".img").show()
-
-
-        Player2.current_total = Player2.current_total + roll2;
+       Player2.current_total = Player2.current_total + roll2
       }
 
       $(".p2-current").text(Player2.current_total)
@@ -112,8 +121,13 @@ var img = new Image();
       $(".player").text("2")
       $(".message").show()
 
+      //disable p1's buttons
       document.getElementById("p1-roll").disabled = true
       document.getElementById("p1-hold").disabled = true
+
+      //enable p2's buttons
+      document.getElementById("p2-roll").disabled = false
+      document.getElementById("p2-hold").disabled = false
       $(".img").empty()
     }
   });
@@ -130,16 +144,25 @@ var img = new Image();
 
     if (Player2.total >= 100) {
       //alert("Player 1 has won!")
+      document.getElementById("p2-roll").disabled = true
+      document.getElementById("p2-hold").disabled = true
       $(".who-won").text("2")
       $(".winner").show()
       $(".reset").show()
     } else {
-      //alert("Player 1's turn!")
-      $(".img").empty()
+      //p2's turn
+      $(".player").text("1")
+      $(".message").show()
+
+      //disable p2's buttons
+      document.getElementById("p2-roll").disabled = true
+      document.getElementById("p2-hold").disabled = true
+
+      //enable p1's buttons
       document.getElementById("p1-roll").disabled = false
       document.getElementById("p1-hold").disabled = false
+      $(".img").empty()
     }
-
   });
 
   $("#reset").click(function() {
